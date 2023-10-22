@@ -12,3 +12,4 @@ SolrJ is a Java client library that provides a convenient way to interact with A
 
 <p float="left">
 <a href="https://solr.apache.org/" style="margin-right: 0.5em;"><img src="[https://img.icons8.com/external-tal-revivo-shadow-tal-revivo/512/external-java-is-a-general-purpose-programming-language-that-is-class-based-logo-shadow-tal-revivo.png](https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Apache_Solr_logo.svg/1200px-Apache_Solr_logo.svg.png)" height="50"></a>
+</p>
