@@ -13,5 +13,5 @@ SolrJ is a Java client library that provides a convenient way to interact with A
 
 <p float="left">
 <a href="https://solr.apache.org/" style="margin-right: 0.5em;"><img src="https://media.licdn.com/dms/image/C4E12AQFgYTjytN0CoQ/article-cover_image-shrink_600_2000/0/1613574628975?e=2147483647&v=beta&t=wQ5PG4Tsn2Ctdf4nvJlTEC2W0GB8L00B5eAWLaktNyA" height="50"></a>
-<a href="https://maven.apache.org/what-is-maven.html" style="margin-right: 0.5em;"><img src="[https://media.licdn.com/dms/image/C4E12AQFgYTjytN0CoQ/article-cover_image-shrink_600_2000/0/1613574628975?e=2147483647&v=beta&t=wQ5PG4Tsn2Ctdf4nvJlTEC2W0GB8L00B5eAWLaktNyA](https://www.campusmvp.es/recursos/image.axd?picture=/2022/2T/apache-maven.png)https://www.campusmvp.es/recursos/image.axd?picture=/2022/2T/apache-maven.png" height="50"></a>
+<a href="https://maven.apache.org/what-is-maven.html" style="margin-right: 0.5em;"><img src="https://www.yoprogramo.com/wp-content/uploads/2019/06/maven-java-logo.png" height="50"></a>
 
