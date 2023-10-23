@@ -8,27 +8,29 @@ import org.apache.solr.common.SolrInputDocument;
 import java.io.File;
 import java.io.IOException;
 import java.util.Scanner;
-import org.apache.solr.client.solrj.response.UpdateResponse;
+import java.util.ArrayList;
+import java.util.List;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-/**
- *
- * @author mague
- */
-public class Index {
 
-    public static void indexador(SolrClient solr, String corpus) throws IOException, SolrServerException, InterruptedException {
+public class Indexer {
 
+    public void Indexar(String corpus, String URL, String nombre_core) throws IOException, SolrServerException {
+
+
+        //Function definitions
+        boolean dev = false;
         int contadorDocumentos = 1;
         SolrInputDocument doc = new SolrInputDocument();
+        List<SolrInputDocument> documents = new ArrayList<>();
         Scanner scan = new Scanner(new File(corpus));
         StringBuilder stringBuilder;
         String line;
         line = scan.nextLine();
+
+
+        //Create Solr URL
+        String solrServerUrl = URL + nombre_core; // Reemplaza con la URL de tu servidor Solr y núcleo
+
 
         while (scan.hasNextLine()) {
 
@@ -89,23 +91,41 @@ public class Index {
 
                                 }
                                 doc.addField("references", stringBuilder);
-                            }else System.out.println("No se encontro referencias para uno de los archivos");
-                        }else System.out.println("No se encontro texto para uno de los archivos");
-                    }else System.out.println("No se encontro autor para uno de los archivos");
-                }else System.out.println("No se encontro titulo para uno de los archivos");
+                            } else System.out.println("No se encontro referencias para uno de los archivos");
+                        } else System.out.println("No se encontro texto para uno de los archivos");
+                    } else System.out.println("No se encontro autor para uno de los archivos");
+                } else System.out.println("No se encontro titulo para uno de los archivos");
 
-            }else {
+            } else {
                 System.out.println("Error al obtener documento");
             }
-            //Indexar documento en Solr
-            
-            solr.add("core2", doc);
 
-            // Realizar la operación de commit para aplicar los cambios
-            solr.commit();
-            doc = new SolrInputDocument();
             contadorDocumentos++;
+            documents.add(doc);
+            doc = new SolrInputDocument();
 
         }
+
+        for (int i = 0; i < documents.size(); i++) System.out.println(documents.get(i));
+
+        // Crear un cliente Solr
+        SolrClient solrClient = new HttpSolrClient.Builder(solrServerUrl).build();
+
+        try {
+            // Agregar el documento al índice
+            solrClient.add(documents);
+
+            // Enviar los cambios al servidor Solr
+            solrClient.commit();
+
+            System.out.println("Documento indexado con éxito en Solr.");
+        } catch (SolrServerException | IOException e) {
+            System.err.println("Error al indexar el documento en Solr: " + e.getMessage());
+        } finally {
+            // Cerrar el cliente Solr
+            solrClient.close();
+        }
+
     }
+
 }
