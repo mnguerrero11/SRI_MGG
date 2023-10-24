@@ -12,7 +12,7 @@ public class SRI {
 
 
     public static String URL = "http://localhost:8983/solr/";
-    public static String nombre_core = "mycore";
+    public static String nombre_core = "core2";
     public static String corpusRuta = "src/cisi/CISI.ALL";
 
     public static void main(String[] args) throws IOException {
