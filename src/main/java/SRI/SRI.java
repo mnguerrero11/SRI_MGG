@@ -12,8 +12,10 @@ public class SRI {
 
 
     public static String URL = "http://localhost:8983/solr/";
-    public static String nombre_core = "core2";
+    public static String nombre_core = "prueba";
     public static String corpusRuta = "src/cisi/CISI.ALL";
+    public static String querysRuta = "src/cisi/CISI.QRY";
+
 
     public static void main(String[] args) throws IOException {
 
@@ -32,7 +34,7 @@ public class SRI {
             // Realizar acciones según la opción elegida
             switch (menu) {
                 case 1:
-                    System.out.println("OPCIÓN DE INDEXACIÓN DE DOCUMENTO A SOLR DESDE FICHERO");
+                    System.out.println("OPCIÓN DE INDEXACIÓN");
 
                     Indexer index = new Indexer();
 
@@ -45,7 +47,16 @@ public class SRI {
 
                 case 2:
                     System.out.println("OPCIÓN DE CONSULTA");
+
+                    Query consulta = new Query();
+
+                    try {
+                        consulta.Busqueda(querysRuta, URL, nombre_core);
+                    } catch (IOException | SolrServerException e) {
+                        e.printStackTrace();
+                    }
                     break;
+
                 case 3:
                     System.out.println("...");
                     break;

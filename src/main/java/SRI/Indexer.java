@@ -18,7 +18,6 @@ public class Indexer {
 
 
         //Function definitions
-        boolean dev = false;
         int contadorDocumentos = 1;
         SolrInputDocument doc = new SolrInputDocument();
         List<SolrInputDocument> documents = new ArrayList<>();
@@ -105,8 +104,6 @@ public class Indexer {
             doc = new SolrInputDocument();
 
         }
-
-        for (int i = 0; i < documents.size(); i++) System.out.println(documents.get(i));
 
         // Crear un cliente Solr
         SolrClient solrClient = new HttpSolrClient.Builder(solrServerUrl).build();
