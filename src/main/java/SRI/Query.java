@@ -73,7 +73,13 @@ public class Query {
 
         HttpSolrClient solr = new HttpSolrClient.Builder(solrServerUrl).build();
 
-        for (int i = 0; i < documents.size(); i++) {
+        SolrQuery query = new SolrQuery();
+        query.setQuery("text: What problems and concerns are");
+        QueryResponse rsp = solr.query(query);
+        SolrDocumentList docs = rsp.getResults();
+        System.out.println(docs);
+
+        /*for (int i = 0; i < documents.size(); i++) {
 
             String[] first5Words = documents.get(i).getField("W").getValue().toString().split("\\s+");
             StringBuilder query5 = new StringBuilder();
@@ -90,7 +96,10 @@ public class Query {
             for (int k = 0; k < docs.size(); k++)
                 System.out.println(docs.get(k));
 
-        }
+        }*/
+
+
+
 
     }
 
