@@ -61,7 +61,7 @@ public class Query {
                     }
                     doc.addField("W", stringBuilder);
 
-                } else System.out.println("Error, no se encuentra w para dicho ID");
+                } else System.out.println("Error, no se encuentra W para dicho ID");
             } else System.out.println("No hay más lineas habiendo ID o viceversa");
 
             contadorDeConsultas++;
@@ -73,33 +73,39 @@ public class Query {
 
         HttpSolrClient solr = new HttpSolrClient.Builder(solrServerUrl).build();
 
-        SolrQuery query = new SolrQuery();
-        query.setQuery("text: What problems and concerns are");
-        QueryResponse rsp = solr.query(query);
-        SolrDocumentList docs = rsp.getResults();
-        System.out.println(docs);
-
-        /*for (int i = 0; i < documents.size(); i++) {
+        for (int i = 0; i < documents.size(); i++) {
 
             String[] first5Words = documents.get(i).getField("W").getValue().toString().split("\\s+");
             StringBuilder query5 = new StringBuilder();
+            String word;
+            int num_words = 0;
 
-            for (int j = 0; (j < NUM_PALABRAS && j < first5Words.length); j++)
-                query5.append(first5Words[j]).append(" ");
+            for (int j = 0; (num_words < NUM_PALABRAS && j < first5Words.length); j++) {
 
+
+                word = first5Words[j];
+                if (!word.isBlank()) {
+                    word = word.replaceAll("[\\(\\)\\[\\].,:_'\"]", "");
+                    query5.append(word).append(" ");
+                    num_words++;
+                }
+            }
+            //System.out.println(i+" - "+query5);
 
             SolrQuery query = new SolrQuery();
-            query.setQuery("text:"+query5.toString());
+            query.setQuery("text:" + query5.toString());
             QueryResponse rsp = solr.query(query);
-            SolrDocumentList docs = rsp.getResults();
-            System.out.println("_____Query"+i+"_____");
-            for (int k = 0; k < docs.size(); k++)
-                System.out.println(docs.get(k));
-
-        }*/
 
 
+            for (org.apache.solr.common.SolrDocument document : rsp.getResults()) {
+                String docId = document.get("id").toString(); // Ajusta según el campo que contiene el identificador del documento
+                //float score = document. // Ajusta según el campo que contiene el puntaje
+                System.out.println(i + "\t" + docId + " 0 ");
+                System.out.println(document.getFieldNames());
 
+            }
+
+        }
 
     }
 

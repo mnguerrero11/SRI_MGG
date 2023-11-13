@@ -1,9 +1,6 @@
 package SRI;
 
-import org.apache.solr.client.solrj.SolrClient;
 import org.apache.solr.client.solrj.SolrServerException;
-import org.apache.solr.client.solrj.impl.HttpSolrClient;
-import org.apache.solr.common.SolrInputDocument;
 
 import java.io.IOException;
 import java.util.Scanner;
@@ -15,6 +12,7 @@ public class SRI {
     public static String nombre_core = "prueba";
     public static String corpusRuta = "src/cisi/CISI.ALL";
     public static String querysRuta = "src/cisi/CISI.QRY";
+    public static String relRuta = "src/cisi/CISI.REL";
 
 
     public static void main(String[] args) throws IOException {
@@ -58,7 +56,8 @@ public class SRI {
                     break;
 
                 case 3:
-                    System.out.println("...");
+                    RELtoTREC nuevo = new RELtoTREC();
+                    nuevo.convertRELtoTREC(relRuta);
                     break;
                 case 4:
                     System.out.println("Cerrando programa.");

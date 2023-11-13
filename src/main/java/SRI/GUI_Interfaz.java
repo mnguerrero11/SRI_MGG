@@ -14,13 +14,14 @@ public class GUI_Interfaz {
     private JTextField nombre_core_index;
     private JTextField nombre_puerto_index;
     private JComboBox selectarchivoIndex;
-    private JTextField query_buscar;
-    private JTextPane results_query_buscar;
+    public JTextPane results_query_buscar;
     private JButton buscarButton;
+    private JComboBox selectarchivoQuery;
 
     public GUI_Interfaz() {
 
         selectarchivoIndex.addItem("src/cisi/CISI.ALL");
+        selectarchivoQuery.addItem("src/cisi/CISI.QRY");
 
         indexarButton.addActionListener(new ActionListener() {
             @Override
@@ -52,16 +53,17 @@ public class GUI_Interfaz {
 
                 String nombre_core = nombre_core_index.getText();
                 String port = nombre_puerto_index.getText();
-                String corpusRuta = (String) selectarchivoIndex.getSelectedItem();
+                String corpusRutaQRY = (String) selectarchivoQuery.getSelectedItem();
 
 
-                System.out.println("OPCIÓN DE INDEXACIÓN");
+                System.out.println("OPCIÓN DE BUSQUEDA");
 
-                Indexer index = new Indexer();
+
+                Query busqueda = new Query();
 
                 try {
-                    index.Indexar(corpusRuta, "http://localhost:"+port+"/solr/", nombre_core);
-                    JOptionPane.showMessageDialog(null, "Indexado exitoso en "+nombre_core, "Información", JOptionPane.INFORMATION_MESSAGE);
+                    busqueda.Busqueda(corpusRutaQRY, "http://localhost:"+port+"/solr/", nombre_core);
+                    JOptionPane.showMessageDialog(null, "Busqueda exitosa en "+nombre_core, "Información", JOptionPane.INFORMATION_MESSAGE);
                 } catch (org.apache.solr.client.solrj.impl.BaseHttpSolrClient.RemoteSolrException | IOException | SolrServerException e1) {
                     JOptionPane.showMessageDialog(null, "Se ha producido un error: " + e1.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                     e1.printStackTrace();

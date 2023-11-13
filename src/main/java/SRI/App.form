@@ -5,7 +5,9 @@
     <constraints>
       <xy x="20" y="65" width="563" height="345"/>
     </constraints>
-    <properties/>
+    <properties>
+      <foreground color="-12828863"/>
+    </properties>
     <border type="none"/>
     <children>
       <grid id="8b688" layout-manager="GridLayoutManager" row-count="3" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
@@ -122,14 +124,6 @@
                 <properties/>
                 <border type="none"/>
                 <children>
-                  <component id="1ddb" class="javax.swing.JTextField" binding="query_buscar">
-                    <constraints>
-                      <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
-                        <preferred-size width="150" height="-1"/>
-                      </grid>
-                    </constraints>
-                    <properties/>
-                  </component>
                   <component id="2f5fd" class="javax.swing.JTextPane" binding="results_query_buscar">
                     <constraints>
                       <grid row="1" column="0" row-span="1" col-span="2" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
@@ -143,7 +137,7 @@
                       <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
-                      <text value="Cadena a Buscar: "/>
+                      <text value="Archivo .QRY"/>
                     </properties>
                   </component>
                   <component id="a55b4" class="javax.swing.JButton" binding="buscarButton">
@@ -151,8 +145,14 @@
                       <grid row="2" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
-                      <text value="Button"/>
+                      <text value="Buscar"/>
                     </properties>
+                  </component>
+                  <component id="fa4ce" class="javax.swing.JComboBox" binding="selectarchivoQuery">
+                    <constraints>
+                      <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties/>
                   </component>
                 </children>
               </grid>
