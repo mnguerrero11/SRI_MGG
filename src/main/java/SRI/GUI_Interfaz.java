@@ -63,7 +63,7 @@ public class GUI_Interfaz {
 
                 try {
                     busqueda.Busqueda(corpusRutaQRY, "http://localhost:"+port+"/solr/", nombre_core);
-                    JOptionPane.showMessageDialog(null, "Busqueda exitosa en "+nombre_core, "Información", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Busqueda exitosa en "+nombre_core +"\nSe generará el archivo trec_solr_file.TREC", "Información", JOptionPane.INFORMATION_MESSAGE);
                 } catch (org.apache.solr.client.solrj.impl.BaseHttpSolrClient.RemoteSolrException | IOException | SolrServerException e1) {
                     JOptionPane.showMessageDialog(null, "Se ha producido un error: " + e1.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                     e1.printStackTrace();
