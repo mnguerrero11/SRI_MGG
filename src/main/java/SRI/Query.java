@@ -24,7 +24,7 @@ public class Query {
     // La app lee el fichero de consultas CISI.QRY, toma las primeras 5 palabras y lanza consulta a Apache Solr.
     // Recorremos la respuesta de Solr y la mostramos.
 
-    public void Busqueda(String querys, String URL, String nombre_core) throws IOException, SolrServerException {
+    public List<String> Busqueda(String querys, String URL, String nombre_core) throws IOException, SolrServerException {
 
         Scanner scan = new Scanner(new File(querys));
         StringBuilder stringBuilder;
@@ -32,6 +32,7 @@ public class Query {
         line = scan.nextLine();
         SolrInputDocument doc = new SolrInputDocument();
         List<SolrInputDocument> documents = new ArrayList<>();
+        List<String> resp_string = new ArrayList<>();
         int contadorDeConsultas = 1;
 
         // Create Solr URL
@@ -104,8 +105,11 @@ public class Query {
                 float score = (float) document.getFieldValue("score"); // Obtiene el score del documento
                 bufferedWriter.flush();
                 bufferedWriter.write(i + " Q0 " + docId + " " + ranking++ + " " + score + " " + EQUIPO);
+                resp_string.add(i + " Q0 " + docId + " " + ranking++ + " " + score + " " + EQUIPO);
                 bufferedWriter.newLine();
             }
         }
+        return resp_string;
+
     }
 }

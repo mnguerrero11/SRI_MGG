@@ -11,7 +11,7 @@ public class RELtoTREC {
 
     public static String filePath = "src/cisi/CISI_REL.TREC";
 
-    public static void convertRELtoTREC(String ruta) throws FileNotFoundException {
+    public void convertRELtoTREC(String ruta) throws FileNotFoundException {
 
         ArrayList <String[]> read = new ArrayList<>();
 
