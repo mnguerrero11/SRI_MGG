@@ -7,9 +7,14 @@ import org.apache.solr.common.SolrInputDocument;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.List;
+
+
 
 
 public class Indexer {
@@ -17,7 +22,6 @@ public class Indexer {
     public void Indexar(String corpus, String URL, String nombre_core) throws IOException, SolrServerException {
 
 
-        //Function definitions
         int contadorDocumentos = 1;
         SolrInputDocument doc = new SolrInputDocument();
         List<SolrInputDocument> documents = new ArrayList<>();
@@ -28,7 +32,7 @@ public class Indexer {
 
 
         //Create Solr URL
-        String solrServerUrl = URL + nombre_core; // Reemplaza con la URL de tu servidor Solr y núcleo
+        String solrServerUrl = URL + nombre_core;
 
 
         while (scan.hasNextLine()) {
@@ -51,7 +55,7 @@ public class Indexer {
                         line = scan.nextLine();
 
                     }
-                    doc.addField("title", stringBuilder);
+                    doc.addField("title", stringBuilder.toString());
                     stringBuilder = new StringBuilder();
 
                     if (line.startsWith(".A")) {
@@ -64,7 +68,7 @@ public class Indexer {
                             line = scan.nextLine();
 
                         }
-                        doc.addField("author", stringBuilder);
+                        doc.addField("author", stringBuilder.toString());
                         stringBuilder = new StringBuilder();
 
                         if (line.startsWith(".W")) {
@@ -77,7 +81,7 @@ public class Indexer {
                                 line = scan.nextLine();
 
                             }
-                            doc.addField("text", stringBuilder);
+                            doc.addField("text", stringBuilder.toString());
                             stringBuilder = new StringBuilder();
                             if (line.startsWith(".X")) {
                                 line = scan.nextLine();
@@ -89,7 +93,7 @@ public class Indexer {
                                     line = scan.nextLine();
 
                                 }
-                                doc.addField("references", stringBuilder);
+                                //doc.addField("references", stringBuilder);
                             } else System.out.println("No se encontro referencias para uno de los archivos");
                         } else System.out.println("No se encontro texto para uno de los archivos");
                     } else System.out.println("No se encontro autor para uno de los archivos");
@@ -115,7 +119,6 @@ public class Indexer {
             // Enviar los cambios al servidor Solr
             solrClient.commit();
 
-            System.out.println("Documento indexado con éxito en Solr.");
         } catch (SolrServerException | IOException e) {
             System.err.println("Error al indexar el documento en Solr: " + e.getMessage());
         } finally {

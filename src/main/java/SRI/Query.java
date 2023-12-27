@@ -4,27 +4,62 @@ import org.apache.solr.client.solrj.SolrQuery;
 import org.apache.solr.client.solrj.SolrServerException;
 import org.apache.solr.client.solrj.impl.HttpSolrClient;
 import org.apache.solr.client.solrj.response.QueryResponse;
+import org.apache.solr.common.SolrDocument;
 import org.apache.solr.common.SolrDocumentList;
 import org.apache.solr.common.SolrInputDocument;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class Query {
 
-    public static final int NUM_PALABRAS = 5;
-    public static final String filePath= "src/cisi/trec_solr_file.TREC";
-    public static final String EQUIPO= "mague";
+    public static final String filePath = "src/cisi/trec_solr_file.TREC";
+    public static final String EQUIPO = "mague";
 
-    // La app lee el fichero de consultas CISI.QRY, toma las primeras 5 palabras y lanza consulta a Apache Solr.
-    // Recorremos la respuesta de Solr y la mostramos.
 
-    public List<String> Busqueda(String querys, String URL, String nombre_core) throws IOException, SolrServerException {
+    public static String encodeUTF8(String input) {
+        try {
+            return URLEncoder.encode(input, "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            // Manejar la excepción apropiadamente
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public List<SolrDocument> BusquedaCadena(String cadena, String URL, String nombre_core) throws IOException, SolrServerException {
+
+        SolrInputDocument doc = new SolrInputDocument();
+
+        // Create Solr URL
+        String solrServerUrl = URL + nombre_core;
+
+        HttpSolrClient solr = new HttpSolrClient.Builder(solrServerUrl).build();
+
+
+
+        SolrQuery query = new SolrQuery("text:(" + cadena + ")");
+        query.set("fl", "*,score");
+        System.out.println("Query: "+query);
+
+        QueryResponse rsp = solr.query(query);
+        SolrDocumentList results = rsp.getResults();
+
+        List<SolrDocument> resultados = new ArrayList<>();
+
+        for (org.apache.solr.common.SolrDocument document : rsp.getResults()) {
+            resultados.add(document);
+        }
+
+        return resultados;
+
+    }
+
+    /*public List<String> Busqueda(String querys, String URL, String nombre_core) throws IOException, SolrServerException {
 
         Scanner scan = new Scanner(new File(querys));
         StringBuilder stringBuilder;
@@ -72,32 +107,16 @@ public class Query {
         FileWriter fileWriter = new FileWriter(filePath);
         BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
 
-        for (int i = 0; i < documents.size(); i++) {
+        for (int i = 1; i < documents.size(); i++) {
 
-            String[] first5Words = documents.get(i).getField("W").getValue().toString().split("\\s+");
-            StringBuilder query5 = new StringBuilder();
-            String word;
-            int num_words = 0;
+            String cadenaCodificada = encodeUTF8(documents.get(i).getField("W").toString());
 
-            for (int j = 0; (num_words < NUM_PALABRAS && j < first5Words.length); j++) {
-                word = first5Words[j];
-                if (!word.isBlank()) {
-                    word = word.replaceAll("[\\(\\)\\[\\].,:_'\"]", "");
-                    query5.append(word).append(" ");
-                    num_words++;
-                }
-            }
-
-            SolrQuery query = new SolrQuery("text:" + query5);
-            query.set("fl", "*,score"); // Define los campos a devolver
-            query.set("defType", "edismax"); // Configura el tipo de consulta (edismax para BM25)
-            query.setSort("score", SolrQuery.ORDER.desc); // Ordena por score en orden descendente
-
+            SolrQuery query = new SolrQuery("text:(" +cadenaCodificada+ ")");
+            query.set("fl", "*,score");
             QueryResponse rsp = solr.query(query);
             SolrDocumentList results = rsp.getResults();
 
             int ranking = 0;
-
 
 
             for (org.apache.solr.common.SolrDocument document : rsp.getResults()) {
@@ -105,11 +124,11 @@ public class Query {
                 float score = (float) document.getFieldValue("score"); // Obtiene el score del documento
                 bufferedWriter.flush();
                 bufferedWriter.write(i + " Q0 " + docId + " " + ranking++ + " " + score + " " + EQUIPO);
-                resp_string.add(i + " Q0 " + docId + " " + ranking++ + " " + score + " " + EQUIPO);
+                resp_string.add(i + " Q0 " + docId + " " + ranking + " " + score + " " + EQUIPO);
                 bufferedWriter.newLine();
             }
         }
         return resp_string;
 
-    }
+    }*/
 }

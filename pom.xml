@@ -16,5 +16,8 @@
             <artifactId>solr-solrj</artifactId>
             <version>9.0.0</version>
         </dependency>
+
+
+
     </dependencies>
 </project>

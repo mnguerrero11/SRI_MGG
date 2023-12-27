@@ -45,7 +45,6 @@ public class RELtoTREC {
                 for(int j = 1; j <= num_doc_corpus; j++){
 
                     if(count_reads < num_reads && (Integer.parseInt(read.get(count_reads)[1]) == i &&  Integer.parseInt(read.get(count_reads)[2]) == j )){
-                        System.out.println(i + " 0 " + j +" 1");
                         bufferedWriter.flush();
                         bufferedWriter.write(i + " 0 " + j +" 1");
                         bufferedWriter.newLine();
@@ -56,7 +55,6 @@ public class RELtoTREC {
                         bufferedWriter.flush();
                         bufferedWriter.write(i + " 0 " + j +" 0");
                         bufferedWriter.newLine();
-                        System.out.println((i + " 0 " + j +" 0"));
                     }
                 }
             }

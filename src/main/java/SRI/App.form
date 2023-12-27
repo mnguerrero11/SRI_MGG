@@ -3,7 +3,7 @@
   <grid id="27dc6" binding="panel1" default-binding="true" layout-manager="GridLayoutManager" row-count="3" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="0" left="0" bottom="0" right="0"/>
     <constraints>
-      <xy x="20" y="65" width="876" height="345"/>
+      <xy x="20" y="-4" width="876" height="414"/>
     </constraints>
     <properties>
       <background color="-7170673"/>
@@ -42,18 +42,6 @@
               <text value="Core de Solr:"/>
             </properties>
           </component>
-          <component id="3014b" class="javax.swing.JTextField" binding="nombre_core_index">
-            <constraints>
-              <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
-                <preferred-size width="150" height="-1"/>
-              </grid>
-            </constraints>
-            <properties>
-              <background color="-7170673"/>
-              <foreground color="-4516836"/>
-              <text value=""/>
-            </properties>
-          </component>
           <component id="d4929" class="javax.swing.JTextField" binding="nombre_puerto_index">
             <constraints>
               <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
@@ -72,7 +60,15 @@
             </constraints>
             <properties>
               <foreground color="-12828863"/>
-              <text value="Puerto: de Solr:"/>
+              <text value="Puerto de Solr:"/>
+            </properties>
+          </component>
+          <component id="e9912" class="javax.swing.JComboBox" binding="comboBoxCores">
+            <constraints>
+              <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <background color="-7170673"/>
             </properties>
           </component>
         </children>
@@ -95,7 +91,7 @@
               </grid>
             </constraints>
             <properties>
-              <background color="-7170673"/>
+              <background color="-10591901"/>
               <foreground color="-4516836"/>
             </properties>
             <border type="none"/>
@@ -116,8 +112,8 @@
                       <grid row="2" column="0" row-span="1" col-span="4" vsize-policy="0" hsize-policy="3" anchor="2" fill="1" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
-                      <background color="-10591901"/>
-                      <foreground color="-7170673"/>
+                      <background color="-4516836"/>
+                      <foreground color="-1515"/>
                       <opaque value="true"/>
                       <selected value="false"/>
                       <text value="Indexar"/>
@@ -169,15 +165,7 @@
                     <properties>
                       <background color="-10591901"/>
                       <foreground color="-10591901"/>
-                      <text value="Archivo .QRY"/>
-                    </properties>
-                  </component>
-                  <component id="fa4ce" class="javax.swing.JComboBox" binding="selectarchivoQuery">
-                    <constraints>
-                      <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
-                    </constraints>
-                    <properties>
-                      <background color="-7170673"/>
+                      <text value="Buscar cadena:"/>
                     </properties>
                   </component>
                   <component id="d13f9" class="javax.swing.JLabel" binding="label1">
@@ -186,16 +174,76 @@
                     </constraints>
                     <properties>
                       <foreground color="-10591901"/>
-                      <text value="INFO: en caso de éxito se creará un archivo con el siguiente formato: Consulta Q0 documento ranking score EQUIPO"/>
+                      <text value="Introduzca una cadena para quealizar la búsqueda"/>
                     </properties>
                   </component>
-                  <component id="a55b4" class="javax.swing.JButton" binding="buscarButton">
+                  <component id="a55b4" class="javax.swing.JButton" binding="buscarCadenaButton">
                     <constraints>
                       <grid row="3" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="2" fill="1" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
+                      <background color="-4516836"/>
+                      <foreground color="-1515"/>
+                      <text value="Buscar"/>
+                    </properties>
+                  </component>
+                  <component id="bc874" class="javax.swing.JTextField" binding="CadenaBuscar">
+                    <constraints>
+                      <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                        <preferred-size width="150" height="-1"/>
+                      </grid>
+                    </constraints>
+                    <properties>
+                      <background color="-7170673"/>
+                    </properties>
+                  </component>
+                </children>
+              </grid>
+              <grid id="f6d68" layout-manager="GridLayoutManager" row-count="4" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                <margin top="0" left="0" bottom="0" right="0"/>
+                <constraints>
+                  <tabbedpane title="Busqueda de queries completa"/>
+                </constraints>
+                <properties>
+                  <background color="-7170673"/>
+                  <foreground color="-7170673"/>
+                </properties>
+                <border type="none"/>
+                <children>
+                  <component id="16a83" class="javax.swing.JLabel">
+                    <constraints>
+                      <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
                       <background color="-10591901"/>
-                      <foreground color="-7170673"/>
+                      <foreground color="-10591901"/>
+                      <text value="Archivo .QRY"/>
+                    </properties>
+                  </component>
+                  <component id="96972" class="javax.swing.JComboBox" binding="selectarchivoQuery">
+                    <constraints>
+                      <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <background color="-7170673"/>
+                    </properties>
+                  </component>
+                  <component id="eba06" class="javax.swing.JLabel">
+                    <constraints>
+                      <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <foreground color="-10591901"/>
+                      <text value="INFO: en caso de éxito se creará un archivo con el siguiente formato: Consulta Q0 documento ranking score EQUIPO"/>
+                    </properties>
+                  </component>
+                  <component id="e88a2" class="javax.swing.JButton" binding="CrearButton">
+                    <constraints>
+                      <grid row="3" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="2" fill="1" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <background color="-4516836"/>
+                      <foreground color="-1515"/>
                       <text value="Buscar"/>
                     </properties>
                   </component>
@@ -217,8 +265,8 @@
                       <grid row="2" column="0" row-span="1" col-span="4" vsize-policy="0" hsize-policy="3" anchor="2" fill="1" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
-                      <background color="-10591901"/>
-                      <foreground color="-7170673"/>
+                      <background color="-4516836"/>
+                      <foreground color="-1515"/>
                       <opaque value="true"/>
                       <selected value="false"/>
                       <text value="Convertir"/>
